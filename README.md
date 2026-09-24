@@ -10,3 +10,6 @@
 ## New Features:
 - ##### Added symbol generator
 - Now you can choose to generate symbol or not
+# Update Log 2026/SEP/24:
+## EXTREMELY IMPORTANT
+## I CHANGED THE LICENSE
