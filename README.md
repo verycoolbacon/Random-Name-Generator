@@ -14,12 +14,11 @@
 - ##### Renewed output
 
 
+### Update Log 2026/SEP/24:
+#### EXTREMELY IMPORTANT:
+#### I CHANGED THE LICENSE
 
-# Update Log 2026/SEP/24:
-## EXTREMELY IMPORTANT:
-## I CHANGED THE LICENSE
-
-# Update Log 2026/SEP/22:
-## New Features:
+### Update Log 2026/SEP/22:
+#### New Features:
 - ##### Added symbol generator
 - ##### Now you can choose to generate symbol or not
