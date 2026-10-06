@@ -1,7 +1,10 @@
 import random
 import string
-
-# main function start
+# setting up variables
+symbol_gen_var = False
+random_upper_var = False
+format_choice_var = False
+# function area start
 
 def letter_gen(amount):
     func_list = string.ascii_lowercase
@@ -16,7 +19,7 @@ def letter_gen(amount):
     return result
 
 def num_gen(amount):
-    func_list = "0123456789"
+    func_list = str(string.digits)
     temp = []
     if amount in ("r","R"):
         amount = random.randint(1,10)
@@ -28,7 +31,7 @@ def num_gen(amount):
     return result
 
 def symbol_gen(amount):
-    func_list = "!@#$%^&*()_+=[]"
+    func_list = "?!@#$%^&*()_+=[]"
     temp = []
     if amount in ("r","R"):
         amount = random.randint(1,10)
@@ -39,59 +42,97 @@ def symbol_gen(amount):
     result = "".join(temp)
     return result
 
-# main function end
+def vaild_input_for_gen(prompt,error_msg):
+    user_input = input(prompt)
+    while True:
+        try:
+            if user_input in ("R","r"):
+                return user_input
+            else:
+                int(user_input)
+                return user_input
+        except ValueError:
+            user_input = input(error_msg)
 
-# main asking script start
-
-letter_gen_input = input("Enter amount of letters. R for random: ")
-while True:
-    try:
-        letter_gen_output = letter_gen(letter_gen_input)
-        break
-    except ValueError:
-        letter_gen_input = input("Please enter any number or R for amounts of letters: ")
-
-num_gen_input = input("Enter amount of numbers. R for random: ")
-while True:
-    try:
-        num_gen_output = num_gen(num_gen_input)
-        break
-    except ValueError:
-        num_gen_input = input("Please enter any number or R for amounts of numbers: ")
-
-random_upper_choice = input("Randomize upper charaters? [y/n] ")
-symbol_gen_choice = input("Generate random symbols? [y/n] ")
-
-# main asking script end
-
-# random uppercase choice
-
-if random_upper_choice in ("y","Y"):
+def randomize_upper_func():
     temp_letters = []
-    randomized_upper = ""
+
     for char in letter_gen_output:
-        upper_or_lower_var = random.randint(0,1)
+        upper_or_lower_var = random.randint(0, 1)
+
         if upper_or_lower_var == 1:
             temp_letters.append(char.upper())
         else:
             temp_letters.append(char)
-    randomized_upper = "".join(temp_letters)
-else:
-    randomized_upper = letter_gen_output
 
-# symbol generator choice
+    return "".join(temp_letters)
 
+def custom_format(answer):
+    pos = 1
+    if answer in ("l","L"):
+        pos += 1
+        return letter_gen_output
+    elif answer in ("n","N"):
+        pos += 1
+        return num_gen_output
+    elif answer in ("s","S"):
+        pos += 1
+        return symbol_gen_output
+    else:
+        print("Invaild input")
+
+# function area end
+
+letter_gen_output = letter_gen(vaild_input_for_gen("Enter amount of letters. R for random: ","Please enter any number or R: "))
+num_gen_output = num_gen(vaild_input_for_gen("Enter amount of numbers. R for random: ","Please enter any number or R: "))
+
+symbol_gen_choice = input("\nDo you want to generate symbols? [y/n] ")
+
+# symbol gen choice check
 if symbol_gen_choice in ("y","Y"):
-    symbol_gen_input = input("Enter amount of symbols. R for random: ")
-    while True:
-        try:
-            symbol_gen_output = symbol_gen(symbol_gen_input)
-            break
-        except ValueError:
-            symbol_gen_input = input("Please enter any number or R for amounts of symbols: ")
+    symbol_gen_var = True
+    symbol_gen_output = symbol_gen(vaild_input_for_gen("Enter amount of letters. R for random: ","Please enter any number or R: "))
 else:
     symbol_gen_output = ""
 
-# final answer output
-print(num_gen_output+randomized_upper+symbol_gen_output)
-# this script is made by verycoolbacon
+#---> letter_gen_output = random_upper_output after this point <---#
+
+random_upper_choice = input("\nDo you want random uppercase? [y/n] ")
+
+# random upper case choice check
+if random_upper_choice in ("y", "Y"):
+    random_upper_var = True
+    letter_gen_output = randomize_upper_func()
+
+format_choice = input("\nCurrent format: [Letter][Number][Symbol]\nDo you want to customize output format? [y/n] ")
+
+# custom format choice check
+if format_choice in ("y","Y"):
+    format_choice_var = True
+    first = custom_format(input("\nEnter format. Current position 1. You can repeat.\nL for letters. N for numbers. S for symbols. [L/N/S] "))
+    second = custom_format(input("\nEnter format. Current position 2. You can repeat.\nL for letters. N for numbers. S for symbols. [L/N/S] "))
+    third = custom_format(input("\nEnter format. Current position 3. You can repeat.\nL for letters. N for numbers. S for symbols. [L/N/S] "))
+    print(f"""
+
+    Summary
+
+    Symbol : {symbol_gen_var}
+    Random uppercase : {random_upper_var}
+    Custom format : {format_choice_var}
+
+    Final answer : {first}{second}{third}
+
+    """)
+else:
+    print(f"""
+
+    Summary
+
+    Symbol : {symbol_gen_var}
+    Random uppercase : {random_upper_var}
+    Custom format : {format_choice_var}
+
+    Final answer : {letter_gen_output}{num_gen_output}{symbol_gen_output}
+    
+    """)
+
