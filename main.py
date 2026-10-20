@@ -196,7 +196,7 @@ else:
     third = symbol_gen_output
 
 # output shuffling
-shuffle_choice = input("Do u want to shuffle the output? [y/n]")
+shuffle_choice = input("Do u want to shuffle the output? [y/n] ")
 
 # final printing
 if shuffle_choice in ("y","Y"):
