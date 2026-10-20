@@ -7,6 +7,15 @@
 ### This script is made by verycoolbacon
 ## Notice:
 #### This script is NOT safe. Please DO NOT use it to protect your sensitive data
+
+# Update Log 2026/10/20:
+## New Features:
+- ##### Added dev mode
+- ##### Added shuffle function
+## Fixes:
+- ##### Fixed spelling errors
+## New:
+- ##### Cleaned up some of the codes
 ---
 # Update Log 2026/10/6:
 ## New Features:
