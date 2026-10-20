@@ -1,9 +1,11 @@
 # Random Name Generator
 ##### A python script that generates a string of random numbers, letters and symbols.
 ##### You can choose to:
-- ##### Randomize upper letters base on the string you generated.
-- ##### Generates symbols or not.
 - ##### Choose random mode for all 3 generators. ( Random range: 1~10 characters )
+- ##### Generates symbols or not.
+- ##### Randomize upper letters base on the string you generated.
+- ##### Shuffle the output.
+- ##### Customize formats
 ### This script is made by verycoolbacon
 ## Notice:
 #### This script is NOT safe. Please DO NOT use it to protect your sensitive data
