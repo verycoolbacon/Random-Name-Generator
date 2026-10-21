@@ -6,6 +6,8 @@
 ## Notice:
 #### This script is NOT safe. Please DO NOT use it to protect your sensitive data
 # Update Log 2026/OCT/21:
+## New Features:
+- ##### Added name generator
 ## New:
 - ##### More output for dev mode
 - ##### Updated README.md
