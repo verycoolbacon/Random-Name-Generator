@@ -16,30 +16,53 @@ def dev_mode():
     global symbol_gen_output
     global letter_gen_output
     dev_mode_var = True
-    print("[DEBUG] dev mode enabled")
     letter_gen_output = letter_gen("R")
     num_gen_output = num_gen("R")
     symbol_gen_output = symbol_gen("R")
     print(f"""
-{'='*45}
-{"[DEBUG]".center(45)}
-{'='*45}
+{'='*65}
+{"[DEBUG START]".center(65)}
+{'='*65}
+{"[GENERATORS (RANDOM)]".center(65)}
+{'='*65}
     letter_gen = {letter_gen_output}
     number_gen = {num_gen_output}
-    symble_gen = {symbol_gen_output}
-    vaild_input 1 (should be error) = {vaild_input_for_gen("prompt_msg(test) ","error_msg(test) ")}
-    vaild_input 2 (should be 123)= {vaild_input_for_gen(123,"error_msg(test) ")}
+    symbol_gen = {symbol_gen_output}
+    name_gen = {name_gen()}
+{'='*65}
+{"[GENERATORS (10 DIGITS)]".center(65)}
+{'='*65}
+    letter_gen = {letter_gen(10)}
+    number_gen = {num_gen(10)}
+    symbol_gen = {symbol_gen(10)}
+{'='*65}
+{"[FUNCTIONS]".center(65)}
+{'='*65}
+    vaild_input 1 (should be error msg) = {vaild_input_for_gen("prompt_msg(DEBUG) ","error_msg(DEBUG) ")}
+    vaild_input 2 (should be 123) = {vaild_input_for_gen(123,"error_msg(DEBUG) ")}
     randomize_upper = {randomize_upper_func(string.ascii_lowercase)}
     custom_format 1 (should be symbols) = {custom_format("S")}
     custom_format 2 (should be numbers) = {custom_format("N")}
     custom_format 3 (should be letters) = {custom_format("L")}
-    shuffle_output = {shuffle_output(string.ascii_lowercase)}
-{'='*45}
-{"[DEBUG COMPLETE]".center(45)}
-{'='*45}
+    custom_format combined = {custom_format("S")
+ + custom_format("N") + custom_format("L")}
+    shuffle_output = {shuffle_output(string.ascii_uppercase)}
+{'='*65}
+{"[DEBUG COMPLETE]".center(65)}
+{'='*65}
 """)
     sys.exit()
 # dev mode end
+# name gen start
+def name_gen():
+  letters = letter_gen(random.randint(3,8))
+  numbers = num_gen(random.randint(3,5))
+  if dev_mode_var == True:
+    return(letters+numbers)
+  else:
+    print(letters+numbers)
+    sys.exit()
+# name gen end
 def letter_gen(amount):
     func_list = string.ascii_lowercase
     temp = []
@@ -85,9 +108,12 @@ def vaild_input_for_gen(prompt,error_msg):
         try:
             if user_input in ("R","r"):
                 return user_input
-            elif user_input == "dev mode enable":
+            elif user_input == "dev":
                 dev_mode()
-                return "R"
+                return 0
+            elif user_input == "name":
+                name_gen()
+                return 0
             else:
                 int(user_input)
                 return user_input
@@ -153,7 +179,6 @@ def summary(final_answer):
     """)
 
 # function area end
-# dev mode
 
 # main script start
 letter_gen_output = letter_gen(vaild_input_for_gen("Enter amount of letters. R for random: ","Please enter any number or R: "))
